@@ -1,0 +1,235 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://kit.fontawesome.com/73ff4ff1b8.js"></script>
+    
+
+  <title>Food Cost</title>
+  
+<style>
+
+   body {
+     
+     background-color: lightblue;
+     
+   }
+  
+
+  
+  .foodCost {
+    
+    font-size: 20px;
+    
+  }
+    
+  #calories, #cost  {
+    
+    border-width: 1px;
+    border-color: blue;
+    height: 75px;
+    width: 90%;
+    padding: 5px;
+    font-size: 1em;
+    
+  }
+  
+
+  
+  #inner {
+    
+    margin: 0 auto;
+    text-align: center;
+    font-size: 3em;
+    margin-top: 50px;
+    line-height: 3;
+    width: 100%;
+    
+  }
+  
+  #button {
+    
+    width: 90%;
+    font-size: 1em;
+    color: green;
+    padding: 15px;
+  }
+  
+  #answer {
+    
+    font-size: 1em;
+    color: red;
+    line-height: 2;
+    display: none;
+    text-align: left;
+  }
+  
+  #another {
+    
+    margin-left: 5%;
+    color: green;
+    
+  }
+  
+  .orange {
+    
+    color: orange;
+  }
+  
+   table {
+    
+    width: 92%;
+    margin: 0 auto;
+    padding: 10px;
+    
+  }
+  
+  td {
+    
+    border: 2px dotted blue;
+    //padding: 10px;
+    padding-left: 20px;
+    width: 50%;
+  }
+  
+  #top {
+    
+    text-align: center;
+    //margin-right: 5%;
+    font-size: .5em;
+    color: red;
+    line-height: 1.5;
+    
+  }
+  
+  .fa-egg {
+    
+    color: #F0EAD6;
+  }
+  
+  .fa-carrot {
+    
+    color: orange;
+
+
+  }
+  
+  .fa-money-bill-alt {
+    
+    color: green;
+  }
+  
+  .fa-grin-stars {
+    
+    color: white;
+  }
+    
+  
+  
+</style>
+</head>
+
+<div id="inner">
+  
+<div id="top">
+  
+<i class="fas fa-carrot"> </i>
+<i class="fas fa-egg"> </i>
+<i class="fas fa-bacon"> </i>
+<i class="far fa-money-bill-alt"> </i>
+<i class="fas fa-grin-stars"></i>
+<p>
+  
+  Cost Extrapolation Calculator. Enter food cost and calories in food.
+  <br>Output will display cost per day, week, month and year, assuming
+  a 2200 calorie diet.
+  
+</p>
+
+
+</div>
+  
+  <div id='answer'>
+
+
+      
+      <table id='table'>
+        
+        <tr>
+          <td>Per Day</td>
+          <td id='cpd'></td>
+        </tr>
+        <tr>
+          <td>Per Week</td>
+          <td id='cpw'></td>
+        </tr>
+          <tr>
+          <td>Per Month</td>
+          <td id='cpm'></td>
+        </tr>
+        <tr>
+          <td>Per Year</td>
+          <td id='cpy'></td>
+        </tr>
+      </table>
+      
+      <span id="another"><em>Evaluate Another Food:</em> </span>
+</div>
+
+<script>
+let foodcost
+let calories
+
+
+function findCPD() {
+  
+    foodcost = document.getElementById('cost').value
+    calories = document.getElementById('calories').value
+    document.getElementById('answer').focus()
+    
+    
+    let cpd = (foodcost / calories) * 2200
+    let cpw = cpd * 7
+    let cpy = cpw * 52
+    let cpm = cpy / 12
+    
+ 
+    
+    if (foodcost != '' && calories != '') {
+      
+          document.getElementById('cpd').innerHTML = `$${cpd.toFixed(2)}`
+          document.getElementById('cpw').innerHTML = `$${cpw.toFixed(2)}`
+          document.getElementById('cpm').innerHTML = `$${cpm.toFixed(2)}`
+          document.getElementById('cpy').innerHTML = `$${cpy.toFixed(2)}`
+          document.getElementById('answer').style.display = 'block'
+
+
+
+    }
+     
+     else {
+       
+       alert('Error: You MUST enter Unit Price and Number of Calories')
+       
+     }
+    
+       document.getElementById('cost').value = ""
+       document.getElementById('calories').value = ""
+
+}
+
+</script>
+
+
+
+
+<input type='text' id='cost' placeholder="Price"><br>
+<input type='text' id='calories' placeholder="Calories"><br>
+
+<button type='submit' id='button' onClick='findCPD()'>Extrapolated Cost </button>
+
+
+</div>
+
+</html>
+
