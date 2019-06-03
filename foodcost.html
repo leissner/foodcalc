@@ -2,17 +2,28 @@
 <!DOCTYPE html>
 <html>
   <head>
+
     <script src="https://kit.fontawesome.com/73ff4ff1b8.js"></script>
     
 
   <title>Food Cost</title>
+  
+
   
 <style>
 
    body {
      
      background-color: lightblue;
+     font-family: Verdana;
      
+   }
+   
+   h1 {
+     
+     font-size: .5em;
+     font-family: 'Bungee Inline', cursive;
+
    }
   
 
@@ -23,7 +34,7 @@
     
   }
     
-  #calories, #cost  {
+  #calories, #cost, #calform {
     
     border-width: 1px;
     border-color: blue;
@@ -41,11 +52,18 @@
     margin: 0 auto;
     text-align: center;
     font-size: 3em;
-    margin-top: 50px;
+    //margin-top: 50px;
     line-height: 3;
     width: 100%;
     
   }
+  
+  #innerP {
+    
+    font-size: 10px;
+  }
+  
+ 
   
   #button {
     
@@ -68,6 +86,7 @@
     
     margin-left: 5%;
     color: green;
+    font-size: .75em;
     
   }
   
@@ -87,17 +106,28 @@
   td {
     
     border: 2px dotted blue;
+    border-radius: 8px;
     //padding: 10px;
     padding-left: 20px;
     width: 50%;
+    
+    
+  }
+  
+  th {
+    
+    font-size: .5em;
+    text-align: left;
+    color: green;
+    font-style: italic;
   }
   
   #top {
     
-    text-align: center;
-    //margin-right: 5%;
-    font-size: .5em;
-    color: red;
+    text-align: left;
+    margin-left: 5%;
+    font-size: .75em;
+    color: black;
     line-height: 1.5;
     
   }
@@ -123,6 +153,48 @@
     
     color: white;
   }
+  
+  .fa-bacon {
+    color: red;
+    
+  }
+  
+  .title {
+    
+    font-size: 1em;
+    margin: 0 75px 075px ;
+    
+  }
+  
+  #icons {
+    
+    margin-left: 50px;
+    
+  }
+  
+  select, option{
+    
+    //height: 100px;
+    width: 300px;
+    font-size: 1em;
+    font-family: Verdana;
+    
+    
+  }
+  
+  #radio_button {
+    
+    font-size: .7em;
+    text-align: left;
+    margin: 0 0 0 50px;
+    color: purple;
+  }
+  
+  .radio {
+   
+   
+   
+  }
     
   
   
@@ -130,21 +202,29 @@
 </head>
 
 <div id="inner">
+
+
+
   
 <div id="top">
   
-<i class="fas fa-carrot"> </i>
+  
+
+<select id="selected" onchange="mcdoublePopulate()">
+  
+  <option>Sample Food</option>
+  <option value="1">McDouble</option>
+  <option value="2">Jasmine Rice</option>
+
+</select>
+<span id='icons'><i class="fas fa-carrot"> </i>
 <i class="fas fa-egg"> </i>
 <i class="fas fa-bacon"> </i>
 <i class="far fa-money-bill-alt"> </i>
 <i class="fas fa-grin-stars"></i>
-<p>
-  
-  Cost Extrapolation Calculator. Enter food cost and calories in food.
-  <br>Output will display cost per day, week, month and year, assuming
-  a 2200 calorie diet.
-  
-</p>
+</span>
+
+<hr>
 
 
 </div>
@@ -154,7 +234,11 @@
 
       
       <table id='table'>
+        <tr>
+        <!-- <th>If you ate nothing but this food . . . </th>
+        <th>. . . it would cost you</th> -->
         
+        </tr>
         <tr>
           <td>Per Day</td>
           <td id='cpd'></td>
@@ -179,16 +263,19 @@
 <script>
 let foodcost
 let calories
+let radios
 
 
 function findCPD() {
   
     foodcost = document.getElementById('cost').value
     calories = document.getElementById('calories').value
+    radios = document.querySelector('input[name="calform"]:checked').value;
+    console.log(radios)
     document.getElementById('answer').focus()
     
     
-    let cpd = (foodcost / calories) * 2200
+    let cpd = (foodcost / calories) * radios
     let cpw = cpd * 7
     let cpy = cpw * 52
     let cpm = cpy / 12
@@ -202,6 +289,8 @@ function findCPD() {
           document.getElementById('cpm').innerHTML = `$${cpm.toFixed(2)}`
           document.getElementById('cpy').innerHTML = `$${cpy.toFixed(2)}`
           document.getElementById('answer').style.display = 'block'
+          document.getElementById("selected").focus()
+
 
 
 
@@ -215,6 +304,9 @@ function findCPD() {
     
        document.getElementById('cost').value = ""
        document.getElementById('calories').value = ""
+       
+
+
 
 }
 
@@ -222,14 +314,91 @@ function findCPD() {
 
 
 
+<script>
 
-<input type='text' id='cost' placeholder="Price"><br>
-<input type='text' id='calories' placeholder="Calories"><br>
 
-<button type='submit' id='button' onClick='findCPD()'>Extrapolated Cost </button>
+
+// var radios = document.getElementsByName('calform');
+
+// for (var i = 0, length = radios.length; i < length; i++)
+// {
+// if (radios[i].checked)
+// {
+//   // do whatever you want with the checked radio
+//   alert(radios[i].value);
+
+//   // only one radio can be logically checked, don't check the rest
+//   break;
+// }
+// }
+
+</script>
+
+
+
+
+<input type='text' id='cost' placeholder="price ($)"><br>
+
+<input type='text' id='calories' placeholder="calories"><br>
+
+<form id="radio_button" name="calform">
+  <span id="radiotext">Choose Daily Calorie Level</span><br>
+<input class="radio" name="calform" type="radio" value="1800"> 1800
+<input name="calform" type="radio" value="2000"> 2000
+<input name="calform" type="radio" value="2500"> 2500
+</form>
+
+<button type='submit' id='button' onClick='findCPD()'>Calculate</button>
 
 
 </div>
+
+<script>
+// var input = document.getElementById("calories")
+// input.addEventListener("keyup", function(event) {
+//   if (event.keyCode === 13) {
+//   event.preventDefault()
+//   document.getElementById("button").click()
+//   document.getElementById("answer").focus()
+//   }
+// })
+
+function mcdoublePopulate() {
+  
+  if (selected.value == '1') {
+  
+  document.getElementById('cost').value = 1.59
+  document.getElementById('calories').value = 375
+  document.getElementById("button").focus()
+
+  
+  } else if (selected.value == '2') {
+  
+  document.getElementById('cost').value = 1.45
+  document.getElementById('calories').value = 3200
+  document.getElementById("button").focus()
+  
+  
+  }
+  
+}
+
+</script>
+
+     <script>
+    
+    var inputs = document.getElementById("calories")
+    
+    inputs.addEventListener("keyup", function(event) {
+      if (event.keyCode === 13) {
+      event.preventDefault();
+      document.getElementById("button").click();
+
+      
+      }
+    })
+    </script>
+ 
 
 </html>
 
