@@ -1,0 +1,200 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+
+    <script src="https://kit.fontawesome.com/73ff4ff1b8.js"></script>
+    <script src="calculator.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Josefin+Sans&display=swap" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+
+  <title>Food Cost</title>
+  
+
+  
+
+</head>
+
+  <div id="inner">
+    
+
+  
+ 
+  
+  <div id="top">
+  
+      <div id="CalorieDiv">
+        <p class="twentytwo"><span id="calnum"  onclick="customize()">  <i class="far fa-edit"></i>
+        <span id='ul'>2200</span> Calories</span><br></p>
+      
+      </div>
+      
+      <div id="ProteinDiv" >
+        <p class="twentytwo"><span id="calnumProtein" onclick="customize2()">  <i class="far fa-edit"></i>
+        <span id='ul'>100</span>(g) Protein</span><br></p>
+      
+      </div>
+      
+      <div id="help"><p class="help">Input desired protein and calorie intake (above) + calories, protein and cost for a given food (below). Outputs extrapolated costs to meet calorie and protein needs over time with a given food. May be useful.</p></div>
+  
+</div>
+  
+  <div id='answer'>
+
+
+      
+      <table id='table'>
+        <tr>
+          <th></th>
+          <th id="calorieCost"></th>
+          <th id="proteinCost"></th>
+        
+        
+        </tr>
+        <tr>
+          <td>Per Day</td>
+          <td id='cpd'></td>
+          <td id='cppDay'></td>
+        </tr>
+        <tr>
+          <td>Per Week</td>
+          <td id='cpw'></td>
+          <td id='cppWeek'></td>
+          
+        </tr>
+          <tr>
+          <td>Per Month</td>
+          <td id='cpm'></td>
+          <td id='cppMonth'></td>
+          
+        </tr>
+        <tr>
+          <td>Per Year</td>
+          <td id='cpy'></td>
+          <td id='cppYear'></td>
+          
+        </tr>
+      </table>
+      <!--
+      <span id="another"><em>Evaluate Another Food:</em> </span>
+      -->
+         
+</div>
+
+<div>
+
+<input type='text' id='cost' placeholder="price ($)"><br>
+<input type='text' id='calories' placeholder="calories"><br>
+<input type='text' id='protein' placeholder='protein (g)'>
+<button type='submit' id='button' onClick='findCPD()'>Calculate</button>
+
+
+  <div id="foodmenu">
+        <select id="selected" onchange="mcdoublePopulate()">
+          <option value="0">Or Select A Food</option>
+          <option value="4">Peanut Butter</option>
+          <option value="6">Peanut Butter (Reduced Fat)</option>
+          <option value="1">McDouble</option>
+          <option value="5">McChicken</option>
+          <option value="2">Jasmine Rice</option>
+          <option value="3">Ribeye (on Sale, $5/lb)</option>
+
+        </select>
+  </div>
+  <div id="selectedValue"></div>
+</div>
+
+
+
+<script>
+
+
+function mcdoublePopulate() {
+  
+  if (selected.value == '1') {
+  
+    document.getElementById('cost').value = 1.59
+    document.getElementById('calories').value = 375
+    document.getElementById('protein').value = 22
+    document.getElementById('selectedValue').innerHTML = "McDouble"
+
+  
+  selected.value = "0"
+
+  } else if (selected.value == '2') {
+  
+    document.getElementById('cost').value = 1.45
+    document.getElementById('calories').value = 3200
+    document.getElementById('protein').value = 60
+    document.getElementById('selectedValue').innerHTML = "Jasmine Rice"
+
+
+  selected.value = '0'
+
+  } else if (selected.value == '3') {
+    
+    document.getElementById('cost').value = 5
+    document.getElementById('calories').value = 1134
+    document.getElementById('protein').value = 121
+    document.getElementById('selectedValue').innerHTML = "Ribeye Steak"
+
+  
+    selected.value = '0'
+    
+  
+
+  } else if (selected.value == '4') {
+    
+    document.getElementById('cost').value = 2.50
+    document.getElementById('calories').value = 2712
+    document.getElementById('protein').value = 100.7
+    document.getElementById('selectedValue').innerHTML = "Peanut Butter"
+
+    
+    selected.value = '0'
+    
+  } else if (selected.value == '6') {
+    
+    
+    document.getElementById('cost').value = 2.50
+    document.getElementById('calories').value = 2360
+    document.getElementById('protein').value = 118
+    document.getElementById('selectedValue').innerHTML = "Reduced Fat Peanut Butter"
+    
+    selected.value = '0'
+
+    
+    
+  } else if (selected.value == '5') {
+    
+    document.getElementById('cost').value = 1.29
+    document.getElementById('calories').value = 354
+    document.getElementById('protein').value = 14.6
+    document.getElementById('selectedValue').innerHTML = "McChicken"
+        
+    selected.value = '0'
+
+  }
+  
+  
+}
+
+</script>
+
+     <script>
+    
+    var inputs = document.getElementById("calories")
+    
+    inputs.addEventListener("keyup", function(event) {
+      if (event.keyCode === 13) {
+      event.preventDefault();
+      document.getElementById("button").click();
+
+      
+      }
+    })
+    </script>
+ 
+</div>
+</html>
+
